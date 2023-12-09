@@ -1,0 +1,41 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+      - Dockerfile
+
+jobs:
+  Testing:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.12"
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PDM
+        uses: pdm-project/setup-pdm@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+        cache: true
+        cache-dependency-path: |
+          ./pdm.lock
+
+      - name: Install dependencies
+        run: |
+          pdm sync -d -G testing
+
+      - name: Run Tests
+        run: |
+          pdm run -v pytest tests

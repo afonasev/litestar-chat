@@ -1,0 +1,70 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: pretty-format-json
+      - id: trailing-whitespace
+
+  # python hooks
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.7
+    hooks:
+      - id: ruff
+        args: ["--fix", "app", "tests"]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.1
+    hooks:
+      - id: mypy
+        args: ["--strict", "app", "tests"]
+        pass_filenames: false
+        additional_dependencies:
+          - pytest
+
+  - repo: https://github.com/pdm-project/pdm
+    rev: 2.10.4
+    hooks:
+      - id: pdm-lock-check
+
+  # - repo: https://github.com/jendrikseipp/vulture
+  #   rev: v2.3
+  #   hooks:
+  #     - id: vulture
+
+  # - repo: https://github.com/fpgmaas/deptry
+  #   rev: 0.12.0
+  #   hooks:
+  #     - id: deptry
+  #       args: ["app", "tests"]
+
+  # other hooks
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+
+  # - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  #   rev: 0.2.3
+  #   hooks:
+  #     - id: yamlfmt
+
+  # - repo: https://github.com/pappasam/toml-sort
+  #   rev: 0.2.3
+  #   hooks:
+  #     - id: toml-sort
+  #     - id: toml-sort-fix
+
+  # - repo: https://github.com/hadolint/hadolint
+  #   rev: v2.12.1-beta
+  #   hooks:
+  #     - id: hadolint

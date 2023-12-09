@@ -1,0 +1,13 @@
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - pdm install --plugins
+      - pdm sync-pre-commit
+    silent: true

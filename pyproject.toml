@@ -1,0 +1,74 @@
+[project]
+name = "litestar-chat"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Afonasev Evgeniy", email = "ea.afonasev@gmail.com" }]
+dependencies = ["litestar>=2.4.3"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
+
+[project.urls]
+Documentation = "https://github.com/afonasev/litestar-chat#readme"
+Issues = "https://github.com/afonasev/litestar-chat/issues"
+Source = "https://github.com/afonasev/litestar-chat"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+### https://pdm-project.org/dev/
+
+[tool.pdm]
+plugins = ["sync-pre-commit-lock"]
+
+[tool.pdm.scripts]
+test = "pytest"
+lint = "pre-commit run --all-files"
+
+### https://github.com/astral-sh/ruff
+
+[tool.ruff]
+unsafe-fixes = true
+target-version = "py312"
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/
+
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["ALL"]
+
+ignore = [
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+    "D203", # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.per-file-ignores]
+# Tests can use magic values, assertions
+"tests/**/*" = ["PLR2004", "S101"]
+
+### https://coverage.readthedocs.io/en/latest/config.html
+
+[tool.coverage.run]
+branch = true
+fail_under = 100
+omit = []
+parallel = true
+show_missing = true
+skip_covered = true
+skip_empty = true
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+
+### https://mypy.readthedocs.io/en/stable/config_file.html
+
+[tool.mypy]
+strict = true
