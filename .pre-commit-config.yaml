@@ -79,6 +79,11 @@ repos:
     hooks:
       - id: dockerfilelint
 
+  - repo: https://github.com/iamthefij/docker-pre-commit
+    rev: master
+    hooks:
+      - id: docker-compose-check
+
   # - repo: https://github.com/dmitri-lerko/pre-commit-docker-kustomize
   #   rev: f3a8533
   #   hooks:
