@@ -1,3 +1,4 @@
+import logging
 from dataclasses import dataclass
 
 from litestar import Controller, Litestar, get, post
@@ -5,7 +6,10 @@ from litestar.exceptions import NotFoundException
 from litestar.types import Scope
 from structlog import get_logger
 
+from app.tools.logging import configure_logging
+
 logger = get_logger()
+logger_std = logging.getLogger()
 
 
 @dataclass
@@ -36,7 +40,7 @@ class UserController(Controller):
 
 async def exception_handler(exc: Exception, scope: Scope) -> None:
     logger.exception(
-        "",
+        "Unexpected error",
         exc=type(exc).__name__,
         message=str(exc),
         path=scope["path"],
@@ -44,7 +48,12 @@ async def exception_handler(exc: Exception, scope: Scope) -> None:
 
 
 def create_app() -> Litestar:
-    return Litestar([UserController], after_exception=[exception_handler])
+    app = Litestar(
+        [UserController],
+        after_exception=[exception_handler],
+    )
+    configure_logging()
+    return app
 
 
 app = create_app()

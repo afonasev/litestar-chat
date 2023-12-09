@@ -1,0 +1,27 @@
+{
+  "disable_existing_loggers": true,
+  "formatters": {
+    "generic": {
+      "()": "logging.Formatter",
+      "datefmt": "[%Y-%m-%d %H:%M:%S %z]",
+      "fmt": "[%(levelname)s] %(message)s"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "formatter": "generic",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "loggers": {
+    "_granian": {
+      "handlers": [
+        "console"
+      ],
+      "level": "INFO",
+      "propagate": false
+    }
+  },
+  "version": 1
+}

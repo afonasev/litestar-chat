@@ -22,7 +22,7 @@ build-backend = "pdm.backend"
 [tool.pdm.scripts]
 test = "pytest --cov=app tests {args}"
 lint = "pre-commit run --all-files"
-server = "granian --interface asgi --port 8080 app.api:app --reload"
+server = "granian --interface asgi --port 8080 --log-config app/logging.json app.api:app --reload {args}"
 
 [tool.pdm.dev-dependencies]
 test = [
@@ -36,6 +36,7 @@ test = [
 lint = ["pytest-deadfixtures>=2.2.1", "ruff>=0.1.7", "mypy>=1.7.1"]
 
 ### https://docs.astral.sh/ruff/
+dev = ["ipython>=8.18.1"]
 
 [tool.ruff]
 unsafe-fixes = true
@@ -53,6 +54,8 @@ ignore = [
     "D10",    # Missing docstring
     "D203",   # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
     "D213",   # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
+    "FIX002", # Line contains TODO, consider resolving the issue
+    "TD003",  # Missing issue link on the line following this TODO
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -70,7 +73,15 @@ omit = ["tests/*", "**/__main__.py"]
 parallel = true
 
 [tool.coverage.report]
-exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+exclude_lines = [
+    "# pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "@(abc.)?abstractmethod",
+]
 fail_under = 100
 show_missing = true
 skip_covered = true
