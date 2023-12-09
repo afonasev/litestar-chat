@@ -11,11 +11,10 @@ repos:
           - id: check-yaml
           - id: end-of-file-fixer
           - id: pretty-format-json
-            args:
-                - --autofix
+            args: [--autofix]
           - id: trailing-whitespace
 
-  # python hooks
+    # python hooks
 
     - repo: https://github.com/astral-sh/ruff-pre-commit
       rev: v0.1.7
@@ -47,10 +46,10 @@ repos:
       hooks:
           - id: pdm-lock-check
 
-  # - repo: https://github.com/jendrikseipp/vulture
-  #   rev: v2.3
-  #   hooks:
-  #     - id: vulture
+    # - repo: https://github.com/jendrikseipp/vulture
+    #   rev: v2.3
+    #   hooks:
+    #     - id: vulture
 
     - repo: https://github.com/fpgmaas/deptry
       rev: 0.12.0
@@ -61,7 +60,7 @@ repos:
             additional_dependencies:
                 - deptry
 
-  # other hooks
+    # other hooks
 
     - repo: https://github.com/commitizen-tools/commitizen
       rev: v3.13.0
@@ -78,16 +77,16 @@ repos:
       hooks:
           - id: yamlfmt
 
-  # - repo: https://github.com/pappasam/toml-sort
-  #   rev: 0.2.3
-  #   hooks:
-  #     - id: toml-sort
-  #     - id: toml-sort-fix
+    - repo: https://github.com/pappasam/toml-sort
+      rev: v0.23.1
+      hooks:
+          - id: toml-sort
+          - id: toml-sort-fix
 
-  # - repo: https://github.com/hadolint/hadolint
-  #   rev: v2.12.1-beta
-  #   hooks:
-  #     - id: hadolint
+    # - repo: https://github.com/hadolint/hadolint
+    #   rev: v2.12.1-beta
+    #   hooks:
+    #     - id: hadolint
 
     - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
       rev: v0.1.0
@@ -99,13 +98,13 @@ repos:
       hooks:
           - id: docker-compose-check
 
-  # - repo: https://github.com/dmitri-lerko/pre-commit-docker-kustomize
-  #   rev: f3a8533
-  #   hooks:
-  #   -   id: kustomize
-  #       name: kustomize-production
-  #       args: [overlays/production]
-  #       verbose: false
+    # - repo: https://github.com/dmitri-lerko/pre-commit-docker-kustomize
+    #   rev: f3a8533
+    #   hooks:
+    #   -   id: kustomize
+    #       name: kustomize-production
+    #       args: [overlays/production]
+    #       verbose: false
 
     - repo: https://github.com/Yelp/detect-secrets
       rev: v1.4.0

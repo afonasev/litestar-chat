@@ -1,123 +1,107 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
 [project]
 name = "litestar-chat"
 version = "0.1.0"
 description = ""
-authors = [{ name = "Afonasev Evgeniy", email = "ea.afonasev@gmail.com" }]
+authors = [{name = "Afonasev Evgeniy", email = "ea.afonasev@gmail.com"}]
 dependencies = ["litestar>=2.4.3", "granian>=0.7.3", "structlog>=23.2.0"]
 requires-python = ">=3.12"
 readme = "README.md"
-license = { text = "MIT" }
+license = {text = "MIT"}
 
 [project.urls]
 Documentation = "https://github.com/afonasev/litestar-chat#readme"
 Issues = "https://github.com/afonasev/litestar-chat/issues"
 Source = "https://github.com/afonasev/litestar-chat"
 
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
-### https://pdm-project.org/dev/
-
-[tool.pdm.scripts]
-test = "pytest --cov=app tests {args}"
-lint = "pre-commit run --all-files"
-server = "granian --interface asgi --port 8080 --log-config app/logging.json app.api:app --reload {args}"
-
-[tool.pdm.dev-dependencies]
-test = [
-    "pytest>=7.4.3",
-    "pytest-cov>=4.1.0",
-    "pytest-asyncio>=0.23.2",
-    "pytest-mock>=3.12.0",
-    "pytest-randomly>=3.15.0",
-]
-
-lint = [
-    "pytest-deadfixtures>=2.2.1",
-    "ruff>=0.1.7",
-    "mypy>=1.7.1",
-]
-
-### https://docs.astral.sh/ruff/
-dev = ["ipython>=8.18.1"]
-
-[tool.ruff]
-unsafe-fixes = true
-target-version = "py312"
-
-[tool.ruff.lint]
-# https://docs.astral.sh/ruff/rules/
-
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
-select = ["ALL"]
-
-ignore = [
-    "A003",   # Class attribute `id` is shadowing a Python builtinRuff
-    "ANN101", # Missing type annotation for `self` in method
-    "D10",    # Missing docstring
-    "D203",   # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
-    "D213",   # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
-    "FIX002", # Line contains TODO, consider resolving the issue
-    "TD003",  # Missing issue link on the line following this TODO
-]
-
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
-
-[tool.ruff.per-file-ignores]
-# Tests can use magic values, assertions
-"tests/**/*" = ["PLR2004", "S101"]
-
-### https://coverage.readthedocs.io/en/latest/config.html
-
-[tool.coverage.run]
-branch = true
-omit = ["tests/*", "**/__main__.py"]
-parallel = true
-
-[tool.coverage.report]
-exclude_lines = [
-    "# pragma: no cover",
-    "def __repr__",
-    "if __name__ == .__main__.:",
-    "if TYPE_CHECKING:",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "@(abc.)?abstractmethod",
-]
-fail_under = 100
-show_missing = true
-skip_covered = true
-skip_empty = true
-
-### https://mypy.readthedocs.io/en/stable/config_file.html
-
-[tool.mypy]
-strict = true
-
-### http://doc.pytest.org/en/latest/customize.html
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-addopts = [
-    "--doctest-modules",
-    "--log-level=DEBUG",
-    "--strict-markers",
-    "--verbosity=2",
-    "--showlocals",
-]
-
-### https://commitizen-tools.github.io/commitizen/
-
 [tool.commitizen]
+# https://commitizen-tools.github.io/commitizen/
 annotated_tag = true
 bump_message = "bump: $current_version → $new_version"
 tag_format = "v$major.$minor.$patch$prerelease"
 update_changelog_on_bump = true
 version_provider = "pep621"
 
-### https://fpgmaas.github.io/deptry/usage/
+[tool.coverage.report]
+exclude_lines = [
+  "# pragma: no cover",
+  "def __repr__",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "@(abc.)?abstractmethod"
+]
+fail_under = 100
+show_missing = true
+skip_covered = true
+skip_empty = true
+
+[tool.coverage.run]
+# https://coverage.readthedocs.io/en/latest/config.html
+branch = true
+omit = ["tests/*", "**/__main__.py"]
+parallel = true
 
 [tool.deptry.per_rule_ignores]
+# https://fpgmaas.github.io/deptry/usage/
 DEP002 = ["granian"]
+
+[tool.mypy]
+# https://mypy.readthedocs.io/en/stable/config_file.html
+strict = true
+
+[tool.pdm.dev-dependencies]
+test = [
+  "pytest>=7.4.3",
+  "pytest-cov>=4.1.0",
+  "pytest-asyncio>=0.23.2",
+  "pytest-mock>=3.12.0",
+  "pytest-randomly>=3.15.0"
+]
+lint = ["pytest-deadfixtures>=2.2.1", "ruff>=0.1.7", "mypy>=1.7.1"]
+dev = ["ipython>=8.18.1"]
+
+[tool.pdm.scripts]
+# https://pdm-project.org/dev/
+test = "pytest --cov=app tests {args}"
+lint = "pre-commit run --all-files"
+server = "granian --interface asgi --port 8080 --log-config app/logging.json app.api:app --reload {args}"
+
+[tool.pytest.ini_options]
+# http://doc.pytest.org/en/latest/customize.html
+asyncio_mode = "auto"
+addopts = [
+  "--doctest-modules",
+  "--log-level=DEBUG",
+  "--strict-markers",
+  "--verbosity=2",
+  "--showlocals"
+]
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/
+unsafe-fixes = true
+target-version = "py312"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["ALL"]
+ignore = [
+  "A003", # Class attribute `id` is shadowing a Python builtinRuff
+  "ANN101", # Missing type annotation for `self` in method
+  "D10", # Missing docstring
+  "D203", # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
+  "D213", # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
+  "FIX002", # Line contains TODO, consider resolving the issue
+  "TD003" # Missing issue link on the line following this TODO
+]
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+[tool.ruff.per-file-ignores]
+# Tests can use magic values, assertions
+"tests/**/*" = ["PLR2004", "S101"]
