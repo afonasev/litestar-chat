@@ -33,7 +33,11 @@ test = [
     "pytest-randomly>=3.15.0",
 ]
 
-lint = ["pytest-deadfixtures>=2.2.1", "ruff>=0.1.7", "mypy>=1.7.1"]
+lint = [
+    "pytest-deadfixtures>=2.2.1",
+    "ruff>=0.1.7",
+    "mypy>=1.7.1",
+]
 
 ### https://docs.astral.sh/ruff/
 dev = ["ipython>=8.18.1"]
@@ -112,3 +116,8 @@ bump_message = "bump: $current_version → $new_version"
 tag_format = "v$major.$minor.$patch$prerelease"
 update_changelog_on_bump = true
 version_provider = "pep621"
+
+### https://fpgmaas.github.io/deptry/usage/
+
+[tool.deptry.per_rule_ignores]
+DEP002 = ["granian"]
