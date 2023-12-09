@@ -19,9 +19,6 @@ build-backend = "pdm.backend"
 
 ### https://pdm-project.org/dev/
 
-[tool.pdm]
-plugins = ["sync-pre-commit-lock"]
-
 [tool.pdm.scripts]
 test = "pytest --cov=app tests {args}"
 lint = "pre-commit run --all-files"
