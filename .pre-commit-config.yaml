@@ -14,6 +14,27 @@ repos:
 
   # python hooks
 
+  - repo: https://github.com/christophmeissner/pytest-pre-commit
+    rev: 1.0.0
+    hooks:
+      - id: pytest
+        args:
+          - --cov=app
+          - tests
+        additional_dependencies:
+          - pytest-cov
+          - pytest-asyncio
+          - pytest-mock
+          - pytest-randomly
+
+      - id: pytest
+        args:
+          - --dead-fixtures
+          - --dup-fixtures
+          - tests
+        additional_dependencies:
+          - pytest-deadfixtures
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.7
     hooks:
