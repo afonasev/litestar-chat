@@ -5,8 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-    commit-message:
-      prefix: "[python] "
     open-pull-requests-limit: 10
     groups:
       compatible:
@@ -15,7 +13,6 @@ updates:
           - "patch"
     labels:
       - "dependabot"
-      - "dependencies"
     assignees:
       - afonasev
 
@@ -23,8 +20,6 @@ updates:
     directory: "/docker"
     schedule:
       interval: monthly
-    commit-message:
-      prefix: "[docker] "
     labels:
       - "dependabot"
     assignees:
@@ -34,8 +29,6 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-    commit-message:
-      prefix: "[actions] "
     labels:
       - "dependabot"
     assignees:

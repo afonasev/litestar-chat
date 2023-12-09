@@ -14,42 +14,30 @@ repos:
 
   # python hooks
 
-  - repo: https://github.com/christophmeissner/pytest-pre-commit
-    rev: 1.0.0
-    hooks:
-      - id: pytest
-        args:
-          - --cov=app
-          - tests
-        additional_dependencies:
-          - pytest-cov
-          - pytest-asyncio
-          - pytest-mock
-          - pytest-randomly
-
-      - id: pytest
-        args:
-          - --dead-fixtures
-          - --dup-fixtures
-          - tests
-        additional_dependencies:
-          - pytest-deadfixtures
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.6
+    rev: v0.1.7
     hooks:
       - id: ruff
         args: ["--fix", "app", "tests"]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.1
+  - repo: local
     hooks:
       - id: mypy
-        args: ["--strict", "app", "tests"]
+        name: mypy
+        entry: .venv/bin/mypy --strict app tests
+        language: script
         pass_filenames: false
-        additional_dependencies:
-          - pytest
+      - id: pytest-deadfixtures
+        name: pytest-deadfixtures
+        entry: .venv/bin/pytest --dead-fixtures --dup-fixtures tests
+        language: script
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: .venv/bin/pytest --cov=app tests
+        language: script
+        pass_filenames: false
 
   - repo: https://github.com/pdm-project/pdm
     rev: 2.10.4

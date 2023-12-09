@@ -22,3 +22,9 @@ Install <https://pdm-project.org/dev/> and <https://pre-commit.com>, then
 ### Lint
 
     pdm run lint
+
+### Run server
+
+<https://github.com/emmett-framework/granian>
+
+    pdm run server
