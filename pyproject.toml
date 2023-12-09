@@ -23,7 +23,7 @@ build-backend = "pdm.backend"
 plugins = ["sync-pre-commit-lock"]
 
 [tool.pdm.scripts]
-test = "pytest"
+test = "pytest --cov=app app"
 lint = "pre-commit run --all-files"
 
 ### https://github.com/astral-sh/ruff

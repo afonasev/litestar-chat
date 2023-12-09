@@ -1,4 +1,4 @@
-name: Tests
+name: Testing
 
 on:
   pull_request:
@@ -12,14 +12,12 @@ on:
 
 jobs:
   Testing:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         python-version:
           - "3.12"
-        os:
-          - ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -28,9 +26,9 @@ jobs:
         uses: pdm-project/setup-pdm@v2
         with:
           python-version: ${{ matrix.python-version }}
-        cache: true
-        cache-dependency-path: |
-          ./pdm.lock
+          cache: true
+          cache-dependency-path: |
+            ./pdm.lock
 
       - name: Install dependencies
         run: |
