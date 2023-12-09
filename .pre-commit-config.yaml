@@ -74,6 +74,11 @@ repos:
   #   hooks:
   #     - id: hadolint
 
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+      - id: dockerfilelint
+
   # - repo: https://github.com/dmitri-lerko/pre-commit-docker-kustomize
   #   rev: f3a8533
   #   hooks:
