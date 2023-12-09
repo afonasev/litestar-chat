@@ -35,13 +35,6 @@ repos:
     hooks:
       - id: pdm-lock-check
 
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
-    hooks:
-      - id: python-safety-dependencies-check
-        files: pyproject.toml
-        # args: ["--groups=dev,test", "--ignore=39153,39652"]
-
   # - repo: https://github.com/jendrikseipp/vulture
   #   rev: v2.3
   #   hooks:
@@ -87,7 +80,7 @@ repos:
       - id: dockerfilelint
 
   - repo: https://github.com/iamthefij/docker-pre-commit
-    rev: master
+    rev: v3.0.1
     hooks:
       - id: docker-compose-check
 
