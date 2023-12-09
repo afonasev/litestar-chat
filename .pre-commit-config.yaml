@@ -73,3 +73,17 @@ repos:
   #   rev: v2.12.1-beta
   #   hooks:
   #     - id: hadolint
+
+  # - repo: https://github.com/dmitri-lerko/pre-commit-docker-kustomize
+  #   rev: f3a8533
+  #   hooks:
+  #   -   id: kustomize
+  #       name: kustomize-production
+  #       args: [overlays/production]
+  #       verbose: false
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        exclude: pdm.lock
