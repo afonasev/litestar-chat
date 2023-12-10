@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "litestar-chat"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = [{name = "Afonasev Evgeniy", email = "ea.afonasev@gmail.com"}]
 dependencies = ["litestar>=2.4.3", "granian>=0.7.3", "structlog>=23.2.0"]
