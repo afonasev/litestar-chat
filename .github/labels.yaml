@@ -1,0 +1,24 @@
+---
+    - name: bug
+      color: d73a4a
+      description: Something isn't working
+    - name: documentation
+      color: 0075ca
+      description: Improvements or additions to documentation
+    - name: duplicate
+      color: cfd8d7
+      description: This issue or pull request already exists
+    - name: enhancement
+      color: a22eef
+    - name: wontfix
+      color: '000000'
+      description: This will not be worked on
+    - name: dependabot
+      color: 49BA02
+      description: Automated dependency updates
+    - name: question
+      color: d876e3
+      description: Further information is requested
+    - name: perf
+      color: 0052CC
+      description: A code change that improves performance
