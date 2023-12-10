@@ -2,14 +2,18 @@
 name: Qualite Gate
 
 on:
-    pull_request:
     push:
         branches:
             - main
         paths-ignore:
             - docs/**
             - '*.md'
-            - Dockerfile
+    pull_request:
+        branches:
+            - main
+        paths-ignore:
+            - docs/**
+            - '*.md'
 
 jobs:
     qualite_gate:
