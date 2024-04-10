@@ -52,3 +52,20 @@ async def test_get_not_existed_user(
             "/users/0",
         )
         assert response.status_code == HTTP_404_NOT_FOUND
+
+
+async def test_update_user(
+    test_client: AsyncTestClient[Litestar],
+) -> None:
+    user = {
+        "id": 1,
+        "last_name": "last_name",
+        "first_name": "first_name",
+    }
+    async with test_client as client:
+        response = await client.put(
+            "/users/1",
+            json=user,
+        )
+        assert response.status_code == HTTP_200_OK
+        assert response.json() == user

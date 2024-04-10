@@ -1,7 +1,7 @@
 import logging
 from dataclasses import dataclass
 
-from litestar import Controller, Litestar, get, post
+from litestar import Controller, Litestar, get, post, put
 from litestar.exceptions import NotFoundException
 from litestar.types import Scope
 from structlog import get_logger
@@ -24,18 +24,27 @@ class UserController(Controller):
 
     @post()
     async def create_user(self, data: User) -> User:
+        """Create user."""
         logger.info("User created", user=data)
         return data
 
     @get()
     async def list_users(self) -> list[User]:
+        """List users."""
         return []
 
     @get(path="/{user_id:int}")
     async def get_user(self, user_id: int) -> User:
+        """Get user."""
         if user_id == 0:
             raise NotFoundException
         return User(id=user_id, first_name="first_name", last_name="last_name")
+
+    @put(path="/{user_id:int}")
+    async def update_user(self, data: User) -> User:
+        """Update user."""
+        logger.info("User updated", user=data)
+        return data
 
 
 async def exception_handler(exc: Exception, scope: Scope) -> None:
